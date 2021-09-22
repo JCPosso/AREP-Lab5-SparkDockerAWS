@@ -1,0 +1,41 @@
+version: '2'
+
+
+services:
+  db:
+    image: mongo:latest
+    container_name: db
+    environment:
+      MONGO_INITDB_DATABASE: RoundRobin
+      MONGO_INITDB_ROOT_USERNAME: camilo
+      MONGO_INITDB_ROOT_PASSWORD: camilo
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - mongodb:/data/db
+      - mongodb_config:/data/configdb
+    ports:
+      - 27017:27017
+    command: mongod
+
+  loadbalancer:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    depends_on:
+      - web
+    container_name: loadbalancer
+    ports:
+      - "30000:6000"
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+    depends_on:
+      - db
+    ports:
+      - "30001-30003:6000"
+
+volumes:
+  mongodb:
+  mongodb_config:
