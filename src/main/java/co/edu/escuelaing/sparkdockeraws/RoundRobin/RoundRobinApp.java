@@ -14,14 +14,14 @@ public class RoundRobinApp {
             res.redirect( "index.html");
             return null;
         });
-        get("/results", (req, res) -> {
+        get("/api/getmessages", (req, res) -> {
             res.status(200);
             res.type("application/json");
             String resp = client.getMessage();
             return resp;
         });
-        post("/results", (req, res) -> {
-            client.postMessage(req.body());
+        post("/api/addmessage", (req, res) -> {
+            client.postMessage(req,res);
             return "";
         });
     }

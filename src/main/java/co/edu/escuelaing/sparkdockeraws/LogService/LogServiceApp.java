@@ -16,12 +16,12 @@ public class LogServiceApp {
         port(getPort());
         get("hello", (req, res) -> "Hello Docker!!!");
         get("/", (req, res) -> {res.redirect( "index.html");return null;});
-        get("/api/messages", (req, res) -> {
+        get("/api/getmessages", (req, res) -> {
                     res.status(200);
                     res.type("application/json");
                     return service.getMessages();
                 });
-        post("/api/messages", (req, res) -> {
+        post("/api/addmessage", (req, res) -> {
             JsonObject json = (JsonObject) JsonParser.parseString(req.body());
             String user = json.get("user").getAsString();
             String message = json.get("message").getAsString();
@@ -36,6 +36,6 @@ public class LogServiceApp {
         if (System.getenv("PORT") != null) {
             return Integer.parseInt(System.getenv("PORT"));
         }
-        return 4567;
+        return 4568;
     }
 }
