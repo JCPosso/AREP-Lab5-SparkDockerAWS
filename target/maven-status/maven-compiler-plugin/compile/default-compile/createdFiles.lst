@@ -1,0 +1,5 @@
+co/edu/escuelaing/sparkdockeraws/RoundRobin/RoundRobinApp.class
+co/edu/escuelaing/sparkdockeraws/RoundRobin/HttpClient.class
+co/edu/escuelaing/sparkdockeraws/LogService/Message.class
+co/edu/escuelaing/sparkdockeraws/LogService/LogServiceApp.class
+co/edu/escuelaing/sparkdockeraws/LogService/MongoService.class

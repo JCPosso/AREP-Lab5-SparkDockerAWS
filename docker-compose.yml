@@ -4,9 +4,9 @@ version: '2'
 services:
   db:
     image: mongo:latest
-    container_name: db
+    container_name: RoundRobin
     environment:
-      MONGO_INITDB_DATABASE: RoundRobin
+      MONGO_INITDB_DATABASE: Messages
       MONGO_INITDB_ROOT_USERNAME: camilo
       MONGO_INITDB_ROOT_PASSWORD: camilo
     volumes:
@@ -17,25 +17,47 @@ services:
       - 27017:27017
     command: mongod
 
-  loadbalancer:
+  roundrobin:
     build:
       context: .
       dockerfile: Dockerfile.web
     depends_on:
-      - web
-    container_name: loadbalancer
+      - service1
+      - service2
+      - service3
+    container_name: roundrobin
     ports:
-      - "30000:6000"
+      - "35000:6000"
 
-  web:
-    build:
-      context: .
-      dockerfile: Dockerfile.db
-    depends_on:
-      - db
-    ports:
-      - "30001-30003:6000"
+  service1:
+      build:
+        context: .
+        dockerfile: Dockerfile.db
+      depends_on:
+        - db
+      container_name: logservice1
+      ports:
+        - "35001:6000"
 
+  service2:
+      build:
+        context: .
+        dockerfile: Dockerfile.db
+      depends_on:
+        - db
+      container_name: logservice2
+      ports:
+        - "35002:6000"
+
+  service3:
+      build:
+        context: .
+        dockerfile: Dockerfile.db
+      depends_on:
+        - db
+      container_name: logservice3
+      ports:
+        - "35003:6000"
 volumes:
   mongodb:
   mongodb_config:

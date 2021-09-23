@@ -1,6 +1,7 @@
 package co.edu.escuelaing.sparkdockeraws.LogService;
 
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -11,7 +12,7 @@ public class LogServiceApp {
     /**
      */
     public static void main( String[] args ) {
-        MongoService service = new MongoService("186.84.88.193", 27017);
+        MongoService service = new MongoService();
         staticFileLocation("/public");
         port(getPort());
         get("hello", (req, res) -> "Hello Docker!!!");
@@ -19,7 +20,7 @@ public class LogServiceApp {
         get("/api/getmessages", (req, res) -> {
                     res.status(200);
                     res.type("application/json");
-                    return service.getMessages();
+                    return new Gson().toJson(service.getMessages());
                 });
         post("/api/addmessage", (req, res) -> {
             JsonObject json = (JsonObject) JsonParser.parseString(req.body());
