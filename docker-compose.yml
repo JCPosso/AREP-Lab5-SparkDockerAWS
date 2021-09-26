@@ -1,5 +1,6 @@
 version: '2'
 
+
 services:
   db:
     image: mongo:latest
@@ -34,7 +35,7 @@ services:
         dockerfile: Dockerfile.db
       depends_on:
         - db
-      container_name: service1
+      container_name: logservice1
       ports:
         - "35001:6000"
 
@@ -44,7 +45,7 @@ services:
         dockerfile: Dockerfile.db
       depends_on:
         - db
-      container_name: service2
+      container_name: logservice2
       ports:
         - "35002:6000"
 
@@ -54,7 +55,7 @@ services:
         dockerfile: Dockerfile.db
       depends_on:
         - db
-      container_name: service3
+      container_name: logservice3
       ports:
         - "35003:6000"
 volumes:

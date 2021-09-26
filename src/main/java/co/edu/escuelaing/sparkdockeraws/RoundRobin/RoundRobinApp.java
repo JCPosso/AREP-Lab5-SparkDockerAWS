@@ -19,13 +19,13 @@ public class RoundRobinApp {
         get("/api/getmessages", (req, res) -> {
             res.status(200);
             res.type("application/json");
+            String resp = client.getMessage();
             client.changeServer();
-            String resp = client.getMessages();
             return resp;
         });
         post("/api/addmessage", (req, res) -> {
-            client.changeServer();
             client.postMessage(req.body());
+            client.changeServer();
             return "";
         });
     }
