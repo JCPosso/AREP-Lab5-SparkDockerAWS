@@ -17,15 +17,15 @@ public class HttpClient{
     /**
      */
     public String getMessage() throws UnirestException {
-        System.out.println(url+ports[nServer]+"/connect");
-        HttpResponse<String> apiResponse = Unirest.get(url+ports[nServer]+"/connect").asString();
+        System.out.println(url+ports[nServer]+"/api/getmessages");
+        HttpResponse<String> apiResponse = Unirest.get(url+ports[nServer]+"/api/getmessages").asString();
         return apiResponse.getBody();
     }
     /**
      */
     public String postMessage(String message) throws UnirestException {
-        System.out.println(url+ports[nServer]+"/connect");
-        HttpResponse<String> apiResponse = Unirest.post(url+ports[nServer]+"/connect")
+        System.out.println(url+ports[nServer]+"/api/addmessage");
+        HttpResponse<String> apiResponse = Unirest.post(url+ports[nServer]+"/api/addmessage")
                 .body(message)
                 .asString();
         return apiResponse.getBody();

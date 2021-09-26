@@ -1,4 +1,5 @@
 window.onload=function(){
+
     var url=window.location.href+'results';
     var mb = document.getElementById("myform");
     getData();
@@ -46,4 +47,5 @@ async function postData(formData){
                     });
                 return true;
             };
+
 }
