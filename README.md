@@ -58,7 +58,7 @@ docker ps
 ```
 Finalmente accedemos a la siguiente dirección y comprobamos que se muestre correctamente el aplicativo web en el navegador:
 ```
-http://192.168.0.7:35000
+http://localhost:35000
 ```
 
 ![localhost](/img/localhost.img)
@@ -95,8 +95,8 @@ algo similar a esto :
 
 ![docker-hub](/img/docker-hub.png)
 
-## Despliegue AWS
-Para poder hacer el despliegue  nos dirigimos a la consola de ```aws``` y la encendemos:
+## AWS
+Para poder hacer el despliegue nos dirigimos a la consola de ```aws``` y la encendemos:
 
 ![consola-aws](/img/consola-aws.png)
 
@@ -152,7 +152,8 @@ sudo usermod -a -G docker ec2-user
 ```
 5. reiniciamos la máquina para guardar los cambios
 ```
-exit..
+exit
+ssh -i "roundrobin.pem" ec2-user@ec2-54-163-79-253.compute-1.amazonaws.com
 ```
 6. Iniciamos servicio docker
 ```
@@ -160,10 +161,60 @@ sudo service docker start
 ```
 
 ### Configurando puertos de enlace AWS
+Preparada la máquina de AWS procedemos a configurarla para que se conecte a los puertos que vamos a dedicar a docker.
+
+Para ello, vamos a la consola de amazon y en seguridad accedemos a grupos de seguridad:
+
+![ec2-seguridad](/img/ec2-seguridad.png)
+
+Una vez allí nos dirigimos al apartado de editar reglas de entrada
+
+![ec2 editar reglas de entrada](/img/ec2-editar-reglas.png)
+
+En este punto crearemos una regla por cada puerto que vamos a necesitar en cada imagen docker, en nuestro caso
+usamos **35000** para roundrobin *35001* service1 *35002* service2 *35003* service 3 y para mongo usamos **27017**
+
+![Ec2 add rules](/img/ec2-add-rules.png)
+
+Terminado esto damos en guardar reglas y configuramos las reglas de salida de la misma forma 
+para que así se pueda comunicar docker con la máquina y viceversa.
+
+### Despliegue 
+
+Para el despliegue ejecutamos las imágenes docker en AWS:
+```
+docker run -d -p [PUERTO]:6000 --name [TAG-IMAGE-AWS] juancamiloposso/arepawsroundrobin:[TAG_DOCKER_IMAGES]
+```
+
+y tendremos algo similar a esto en la consola:
+
+![aws docker run](/img/aws-docker-run.png)
+
+Comprobamos que se encuentren las imágenes con `docker images` :
+
+![AWS docker images](/img/aws-docker-images.png)
+
+y revisamos los contenedores con `docker ps` :
+
+![AWS docker ps](/img/aws-dockerps.png)
+
+Finalmente, verificamos que esté el despliegue en nuestra máquina AWS 
+siguiendo el siguiente enlace
+
+### Pruebas despliegue AWS
+Ejecutamos las mismas pruebas que anteriormente ejecutamos en localhost y probamos que el servicio esté
+correctamente funcionando
+
+![ingreso-local](/img/aws-ingreso.img)
+
+Y efectivamente obtenemos los resultados esperados:
+
+![respuesta-local](/img/aws-respuesta.img)
+
 
 ## Documentación
 
-Documentacion generada en [docs](docs).
+Documentación generada en [docs](docs).
 
 ### Javadoc
 Para generar javadoc ejecute los siguientes comandos.
