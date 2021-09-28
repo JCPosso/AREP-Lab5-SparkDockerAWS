@@ -56,9 +56,10 @@ docker images
 ```
 docker ps
 ```
-Finalmente accedemos a la siguiente dirección y comprobamos que se muestre correctamente el aplicativo web en el navegador:
+Finalmente accedemos a la siguiente dirección con nuestra **IP LOCAL** seguido del puerto **35000**
+y comprobamos que se muestre correctamente el aplicativo web en el navegador:
 ```
-http://localhost:35000
+http://192.168.0.7:35000
 ```
 
 ![localhost](/img/localhost.png)
