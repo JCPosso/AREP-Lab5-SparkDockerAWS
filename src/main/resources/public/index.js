@@ -1,16 +1,17 @@
 window.onload=function(){
-
-    var url=window.location.href+'results';
     var mb = document.getElementById("myform");
     getData();
     mb.addEventListener("submit", (e)=>{
         e.preventDefault();
         const formData= new FormData(e.currentTarget);
         postData(formData);
+        $("#myform")[0].reset();
+        return false;
         });
     function getData(){
+    console.log(window.location.href);
         $.ajax({
-            url: "/api/getmessages",
+            url: "/app/getmessages",
             type: 'GET',
             success:renderList
                 });
@@ -36,7 +37,7 @@ async function postData(formData){
        const nuser = formData.get("data-name");
        const newMessage = formData.get("data-message");
                 jQuery.ajax({
-                        url: "/api/addmessage",
+                        url: "/app/addmessage",
                         type: "POST",
                         data: JSON.stringify({
                                     'user' : nuser,

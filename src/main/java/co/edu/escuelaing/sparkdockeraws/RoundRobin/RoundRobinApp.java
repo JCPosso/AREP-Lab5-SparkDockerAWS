@@ -16,16 +16,18 @@ public class RoundRobinApp {
             res.redirect( "index.html");
             return null;
         });
-        get("/api/getmessages", (req, res) -> {
+        get("/app/getmessages", (req, res) -> {
             res.status(200);
             res.type("application/json");
-            //client.changeServer();
-            String resp = client.getMessage();
+            client.updateURL(req.url());
+            String resp =  client.getMessage();
+            client.changeServer();
             return resp;
         });
-        post("/api/addmessage", (req, res) -> {
-            //client.changeServer();
+        post("/app/addmessage", (req, res) -> {
+            client.updateURL(req.url());
             client.postMessage(req.body());
+            client.changeServer();
             return "";
         });
     }

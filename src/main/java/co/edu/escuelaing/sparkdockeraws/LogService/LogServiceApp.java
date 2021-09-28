@@ -12,9 +12,9 @@ public class LogServiceApp {
     /**
      */
     public static void main( String[] args ) {
+        port(getPort());
         MongoService service = new MongoService();
         staticFileLocation("/public");
-        port(getPort());
         get("hello", (req, res) -> "Hello Docker!!!");
         get("/", (req, res) -> {res.redirect( "index.html");return null;});
         get("/api/getmessages", (req, res) -> {
