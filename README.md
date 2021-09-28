@@ -40,18 +40,18 @@ docker-compose up -d
 ```
 Si se ha ejecutado correctamente en consola obtendremos los siguientes resultados en consola.
 
-![docker-compose](/img/docker-compose.img)
+![docker-compose](/img/docker-compose.png)
 
 Esto significa que nuestras imagenes y contenedores ya han sido creados y ejecutados correctamente , para comprobarlo
 ejecutamos los siguientes comandos y obtendremos los siguientes resultados:
 
-![docker-images](/img/docker-images.img)
+![docker-images](/img/docker-images.png)
 
 ```
 docker images
 ```
 
-![docker-ps](/img/docker-ps.img)
+![docker-ps](/img/docker-ps.png)
 
 ```
 docker ps
@@ -61,17 +61,17 @@ Finalmente accedemos a la siguiente dirección y comprobamos que se muestre corr
 http://localhost:35000
 ```
 
-![localhost](/img/localhost.img)
+![localhost](/img/localhost.png)
 
 ### Probando servicio en localhost
 Al agregar un nombre y un mensaje éste debe aparecer en los logs presentados en la tabla de abajo
 entre las diez primeras:
 
-![ingreso-local](/img/ingreso-local.img)
+![ingreso-local](/img/ingreso-local.png)
 
 Y efectivamente obtenemos los resultados esperados:
 
-![respuesta-local](/img/respuesta-local.img)
+![respuesta-local](/img/respuesta-local.png)
 
 ### Docker hub
 Docker hub es necesario para poder  desplegar las imagenes en AWS, es por ello que debemos crear un repositorio nuevo
@@ -119,7 +119,7 @@ en este caso creamos un nuevo par y descargamos el archivo en el computador
 una vez seleccionadas le damos en 'Lanzar', si se ha lanzado la instancia correctamente nos saldrá un mensaje
 como el siguiente:
 
-![ec2-connect](/img/ec2-connect.png)
+![ec2-connect](/img/ec2-correct.png)
 
 Al seleccionar la instancia  vamos al menu acciones y damos  en conectar:
 
@@ -205,11 +205,11 @@ siguiendo el siguiente enlace
 Ejecutamos las mismas pruebas que anteriormente ejecutamos en localhost y probamos que el servicio esté
 correctamente funcionando
 
-![ingreso-local](/img/aws-ingreso.img)
+![ingreso-local](/img/aws-ingreso.png)
 
 Y efectivamente obtenemos los resultados esperados:
 
-![respuesta-local](/img/aws-respuesta.img)
+![respuesta-local](/img/aws-respuesta.png)
 
 
 ## Documentación
